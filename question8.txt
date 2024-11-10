@@ -1,0 +1,38 @@
+create table books (book_id int primary key, book_name varchar(50), author varchar(50), genre varchar(50), price int, published_year int);
+
+create table members (member_id int primary key, name varchar(50), address varchar(150), email varchar(150), joining_date date);
+
+insert into books values(1, "Wimpy kid", "rowan atkinson", "comedy", 150, 2010);
+
+insert into books values(2, "Wings of fire", "apj abdul kalam", "novel", 350, 2015);
+
+insert into members values (101, "John", "near rmd sinhgad", "john@gmail.com", "2022-02-01" );
+
+insert into members values (102, "Doe", "near sinhgad", "doe@gmail.com", "2023-05-11" );
+
+select * from books;
+
+select * from members;
+
+update books set price=250 where book_id=1;
+
+update members set email="john123@gmail.com" where member_id = 101;
+
+delete from books where book_id = 2;
+
+delete from members where member_id=102;
+
+select author from books;
+
+select email from members;
+
+select genre, COUNT(*) as total_books from books group by genre;
+
+select book_name as bname from books UNION select name from members;
+
+select * from books where price >100;
+
+select * from books;
+
+select * from members;
+

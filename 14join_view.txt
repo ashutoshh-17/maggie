@@ -1,0 +1,31 @@
+create table students (sturoll int primary key, stuname varchar(25), studeptID int);
+
+create table department(deptID int primary key, deptname varchar(25));
+
+insert into department values(101, "Computer");
+
+insert into department values (401, "IT"), (501, "Mechanical");
+
+insert into students values (1, "John", 101), (2, "Doe", 501), (3, "Alice", 401);
+
+select * from students join department on students.studept= department.deptID;
+
+select * from students inner join department on students.studept= department.deptID;
+
+select * from students left join department on students.studept= department.deptID;
+
+select * from students left outer join department on students.studept= department.deptID;
+
+select * from students right join department on students.studept= department.deptID;
+
+select * from students right outer join department on students.studept= department.deptID;
+
+select * from students cross join department on students.studept= department.deptID;
+
+create view dept_view as select deptname from department where deptID= 501;
+
+select * from dept_view;
+
+create view stud_view as select * from students where stuname= "Alice";
+
+select * from stud_view;

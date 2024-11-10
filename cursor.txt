@@ -1,0 +1,36 @@
+create table orollcall (roll_no int primary key, name varchar(20), class int);
+
+create table nrollcall (roll_no int primary key, name varchar(20), class int);
+
+delimiter #
+
+create procedure mergecursor(in rollin int)
+    -> begin
+    -> declare exit_loop boolean;
+    -> declare c1 cursor for select roll_no from orollcall where roll_no=rollin;
+    -> declare continue handler for not found set exit_loop = TRUE;
+    -> open c1;
+    -> fetch c1 into rollin;
+    -> if not exists(select * from nrollcall where roll_no = rollin) then
+    -> insert into nrollcall select * from orollcall where roll_no= rollin;
+    -> end if;
+    -> close c1;
+    -> end #
+    
+delimter;
+
+insert into orollcall values(101, "john", 10);
+
+insert into orollcall values(102, "doe", 9);
+
+insert into orollcall values(103, "mary", 11);
+
+insert into nrollcall values (102, "doe", 9);
+
+select * from nrollcall;
+
+call mergecursor(101);
+
+call mergecursor(103);
+
+select * from nrollcall;

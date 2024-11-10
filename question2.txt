@@ -1,0 +1,34 @@
+create database dbms2_prac;
+
+use dbms2_prac;
+
+create table employee_master (first_name varchar(50),middle_name varchar(50), last_name varchar(50),department varchar(50), manager_id int(20),emp_name varchar(150));
+
+create table branch_master (branch_id int primary key, branch_name varchar(50));
+
+insert into branch_master values (1, "Sales");
+
+insert into branch_master values (2, "Marketing");
+
+insert into branch_master values (3, "Engineering");
+
+
+insert into employee_master values ("Arc", "Hit", "Yad", "Engineering", "1", "Arc Hit Yad");
+
+insert into employee_master values ("Wer", "Asd", "Rty", "Engineering", "1", "Wer Asd Rty");
+
+
+insert into employee_master values ("Fgh", "Zxc", "Qwe", "Engineering", "3", "Fgh Zxc Qwe");
+
+update employee_master set manager_id=2 where middle_name="Asd";
+
+
+create index ind_emp_mast on employee_master(emp_name);
+
+create view emp_view as select first_name, middle_name, last_name, department, manager_id, emp_name from employee_master where manager_id=1;
+
+select * from emp_view;
+
+
+
+

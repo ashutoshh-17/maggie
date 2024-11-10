@@ -1,0 +1,11 @@
+db.createCollection("Orders")
+
+db.Orders.insertMany([{"Cust_ID": 3, "item": "laptop", "amt": 50000, "quantity": 1, "status": "pending"}, {"Cust_ID": 2, "item": "charger", "amt": 2000, "quantity": 2, "status": "delivered"}, {"Cust_ID": 1, "item": "mobile", "amt": 40000, "quantity": 1, "status": "pending"}])
+
+db.Orders.createIndex({"Cust_ID": 1})
+
+db.Orders.createIndex({"item": 1})
+
+db.Orders.find().sort({"amt": 1}).limit(1)
+
+db.Orders.getIndexes()

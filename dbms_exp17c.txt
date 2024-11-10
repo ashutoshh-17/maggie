@@ -1,0 +1,33 @@
+CREATE TABLE StudentInfo (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(50)
+);
+
+INSERT INTO StudentInfo (student_id, student_name) 
+VALUES (1, 'John Doe'),
+       (2, 'Jane Smith'),
+       (3, 'Alice Johnson');
+
+delimiter #
+
+CREATE PROCEDURE GetStudentName (IN p_student_id INT)
+BEGIN
+    DECLARE v_student_name VARCHAR(50);
+
+    SELECT student_name 
+    INTO v_student_name
+    FROM StudentInfo
+    WHERE student_id = p_student_id;
+
+    IF v_student_name IS NOT NULL THEN
+        SELECT CONCAT('Student Name: ', v_student_name) AS result;
+    ELSE
+        SELECT 'No student found with the given ID.' AS result;
+    END IF;
+END #
+
+delimiter ;
+
+CALL GetStudentName(1);
+CALL GetStudentName(2);
+CALL GetStudentName(99);

@@ -1,0 +1,43 @@
+create table library(bookid int primary key, name varchar(25), author varchar(25));
+
+create table library_audit (bookid int primary key, name varchar(25), author varchar(25), modification_date DATE, operation varchar(25));
+
+delimiter #
+create trigger library_update_trigger
+    -> before update on library for each row
+    -> begin
+    -> declare operation varchar(25);
+    -> set operation = "Updated";
+    -> insert into library_audit values(old.bookid, old.name, old.author, curdate(), operation);
+
+create trigger library_delete_trigger
+    -> before delete on library for each row 
+    -> begin
+    -> declare operation varchar(25); 
+    -> set operation = "Deleted";
+    -> insert into library_audit values (old.bookid, old.name, old.author, curdate(), operation);
+    -> end #
+    
+delimiter;
+
+insert into library values (101, "wimpy kid", "arthur russel");
+
+insert into library values (102, "wimpy kid 1", "rowan atkinson");
+
+insert into library values (103, "Harry Potter", "J.K Rowling");
+
+select * from library;
+
+select * from library_audit;
+
+update library set name="arthur weasly" where bookid=101;
+
+select * from library;
+
+select * from library_audit;
+
+delete from library where bookid= 102;
+
+select * from library;
+
+select * from library_audit;

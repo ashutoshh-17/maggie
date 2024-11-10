@@ -1,0 +1,36 @@
+create table dept (inst_id int primary key, dept_nm varchar(50), budget int);
+
+create table instructor(inst_id int primary key, dept_nm, name varchar(150), salary int, raise int );
+
+
+create table student(stud_id int primary key, dept_nm varchar(50),sem int, name varchar(50),yr int, credits int);
+
+create table teaches(inst_id int primary key, course varchar(50), sem int, yr int);
+
+insert into dept values (1, "computer", 50000);
+
+insert into dept values (2, "electronics", 40000);
+
+insert into dept values (3, "mechanical", 30000);
+
+insert into instructor values(1, "computer", "ABC", 20000, 3000);
+
+insert into instructor values(2, "electronics", "DEF", 30000, 2000);
+
+insert into instructor values(3, "mechanical", "GHI", 40000, 5000);
+
+insert into student values (1, "computer", 5, "jkl", 3, 44);
+
+insert into student values (2, "electronics", 6, "mno", 4, 55);
+
+insert into student values (3, "mechanical", 7, "pqr", 5, 66);
+
+select dept_nm, AVG(salary) as avg_salary from instructor group by dept_nm;
+
+select dept_nm, AVG(salary) as highest_avg_salary from instructor group by dept_nm order by highest_avg_salary desc limit 1;
+
+delete from instructor where salary < 20001;
+
+select * from instructor;
+ 
+

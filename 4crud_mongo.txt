@@ -1,0 +1,17 @@
+use dbms_practical
+
+db.createCollection("students")
+
+ db.students.insertOne({"Fname": "John", "Mname": "Paul", "Lname": "Doe", "Branch": "Computer", "Marks": 99, "Year": 2 })
+
+db.students.insertMany([{"Fname": "Jane", "Mname": "Elizabeth", "Lname": "Smith", "Branch": "IT", "Marks": 70, "Year": 3}, {"Fname": "Alice", "Mname": "Marie", "Lname": "Brown", "Branch": "Mechanical", "Marks": 60, "Year": 4}])
+
+db.students.find()
+
+db.students.find({Branch: "Computer"})
+
+db.students.deleteOne({Fname: "Alice", Lname: "Brown"})
+
+db.students.find()
+
+db.students.deleteMany({Marks :{$lt: 80}})
